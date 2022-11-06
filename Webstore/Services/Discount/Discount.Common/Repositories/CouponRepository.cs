@@ -17,7 +17,7 @@ public class CouponRepository : ICouponRepository
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public async Task<CouponDTO> GetDiscount(string productName)
+    public async Task<CouponDTO?> GetDiscount(string productName)
     {
         using var connection = _context.GetConnection();
 
