@@ -28,7 +28,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int
         var orderEntity = _factory.Create(request);
         var newOrder = await _repository.AddAsync(orderEntity);
 
-        _logger.LogInformation($"Order {newOrder.Id} is successfully created.");
+        _logger.LogInformation("Order {OrderId} is successfully created.", newOrder.Id);
 
         await SendMail(newOrder);
 
@@ -47,11 +47,11 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int
         try
         {
             await _emailService.SendEmail(email);
-            _logger.LogInformation($"Sending email for order {newOrder.Id} was successful");
+            _logger.LogInformation("Sending email for order {OrderId} was successful", newOrder.Id);
         }
         catch (Exception e)
         {
-            _logger.LogError($"Sending email for order {newOrder.Id} failed due to error: {e.Message}");
+            _logger.LogError("Sending email for order {OrderId} failed due to error: {ErrorMessage}", newOrder.Id, e.Message);
         }
     }
 }

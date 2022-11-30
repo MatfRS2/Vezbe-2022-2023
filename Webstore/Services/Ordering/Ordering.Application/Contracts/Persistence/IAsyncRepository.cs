@@ -8,12 +8,12 @@ public interface IAsyncRepository<T> where T : AggregateRoot
     Task<IReadOnlyList<T>> GetAllAsync();
     Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);
     Task<IReadOnlyList<T>> GetAsync(
-        Predicate<T> predicate,
+        Expression<Predicate<T>> predicate,
         Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
         string? includeString = null,
         bool disableTracking = true);
     Task<IReadOnlyList<T>> GetAsync(
-        Predicate<T> predicate,
+        Expression<Predicate<T>> predicate,
         List<Expression<Func<T, object>>> includes,
         Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
         bool disableTracking = true);

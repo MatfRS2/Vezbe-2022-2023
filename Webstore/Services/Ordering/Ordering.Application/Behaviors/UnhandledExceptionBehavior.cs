@@ -3,7 +3,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Ordering.Application.Behaviors;
 
-public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+    where TRequest : IRequest<TResponse>
 {
     private readonly ILogger<UnhandledExceptionBehavior<TRequest, TResponse>> _logger;
 
@@ -12,7 +13,7 @@ public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         try
         {
