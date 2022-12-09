@@ -11,4 +11,5 @@
 - `4. седмица` ([пратећи PR #1](https://github.com/MatfRS2/Vezbe-2022-2023/pull/4) [пратећи PR #2](https://github.com/MatfRS2/Vezbe-2022-2023/pull/5))
 - `5. седмица` ([пратећи PR](https://github.com/MatfRS2/Vezbe-2022-2023/pull/6))
 - `6. седмица` ([пратећи PR](https://github.com/MatfRS2/Vezbe-2022-2023/pull/6))
+- `6. седмица` ([пратећи PR](https://github.com/MatfRS2/Vezbe-2022-2023/pull/7))
 
