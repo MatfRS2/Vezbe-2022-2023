@@ -52,7 +52,6 @@ namespace Ordering.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
@@ -82,7 +81,6 @@ namespace Ordering.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")

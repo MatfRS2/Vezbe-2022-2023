@@ -14,7 +14,10 @@ services:
     image: dpage/pgadmin4
 
   orderdb:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+  mqueue:
+    image: rabbitmq:management-alpine
 
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi

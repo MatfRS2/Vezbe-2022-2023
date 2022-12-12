@@ -33,7 +33,7 @@ namespace Ordering.Infrastructure.Migrations
                     Address_EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -54,7 +54,7 @@ namespace Ordering.Infrastructure.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>

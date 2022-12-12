@@ -12,7 +12,7 @@ using Ordering.Infrastructure.Persistence;
 namespace Ordering.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20221211215314_InitialCreate")]
+    [Migration("20221212221922_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,6 @@ namespace Ordering.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
@@ -84,7 +83,6 @@ namespace Ordering.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModifiedDate")
