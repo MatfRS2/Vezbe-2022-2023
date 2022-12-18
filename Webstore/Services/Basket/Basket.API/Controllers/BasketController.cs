@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AutoMapper;
 using Basket.API.Entities;
 using Basket.API.GrpcServices;
@@ -5,10 +6,12 @@ using Basket.API.Repositories;
 using EventBus.Messages.Events;
 using Grpc.Core;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.API.Controllers;
 
+[Authorize(Roles = "Buyer")]
 [ApiController]
 [Route("api/v1/[controller]")]
 public class BasketController : ControllerBase
@@ -37,6 +40,11 @@ public class BasketController : ControllerBase
     [ProducesResponseType(typeof(ShoppingCart), StatusCodes.Status200OK)]
     public async Task<ActionResult<ShoppingCart>> GetBasket(string username)
     {
+        if (User.FindFirst(ClaimTypes.Name)?.Value != username)
+        {
+            return Forbid();
+        }
+        
         var basket = await _repository.GetBasket(username);
         return Ok(basket ?? new ShoppingCart(username));
     }
@@ -45,6 +53,11 @@ public class BasketController : ControllerBase
     [ProducesResponseType(typeof(ShoppingCart), StatusCodes.Status200OK)]
     public async Task<ActionResult<ShoppingCart>> UpdateBasket([FromBody] ShoppingCart basket)
     {
+        if (User.FindFirstValue(ClaimTypes.Name) != basket.Username)
+        {
+            return Forbid();
+        }
+        
         foreach (var item in basket.Items)
         {
             try
@@ -65,6 +78,11 @@ public class BasketController : ControllerBase
     [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
     public async Task<IActionResult> DeleteBasket(string username)
     {
+        if (User.FindFirstValue(ClaimTypes.Name) != username)
+        {
+            return Forbid();
+        }
+        
         await _repository.DeleteBasket(username);
         return Ok();
     }
@@ -75,6 +93,11 @@ public class BasketController : ControllerBase
     [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
     {
+        if (User.FindFirstValue(ClaimTypes.Name) != basketCheckout.BuyerUsername)
+        {
+            return Forbid();
+        }
+
         var basket = await _repository.GetBasket(basketCheckout.BuyerUsername);
         if (basket is null)
         {
